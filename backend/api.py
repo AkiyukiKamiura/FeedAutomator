@@ -3,7 +3,10 @@ from random import *
 from flask_cors import CORS
 
 from backend import app, db
-from backend.models import Task
+from backend.models import Task, Feed
+
+# 自作ライブラリ
+import echo, motto
 
 api = Blueprint('api', __name__)
 
@@ -11,6 +14,13 @@ api = Blueprint('api', __name__)
 def say_hello(name):
     response = { 'msg': "Hello {}".format(name) }
     return jsonify(response)
+
+@api.route('/feeds', methods=['GET'])
+def get_feeds():
+    # feeds = Feed.query.order_by(Feed.id.desc()).all()
+    # feeds_dict = [feed.to_dict() for feed in feeds]
+    # return jsonify(feeds_dict)
+    return motto.aaa()
 
 @api.route('/random')
 def random_number():

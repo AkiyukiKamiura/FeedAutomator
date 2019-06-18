@@ -3,12 +3,17 @@ from flask_cors import CORS
 import requests
 from flask_sqlalchemy import SQLAlchemy
 
+# 自作ライブラリ
+import sys, pathlib
+current_dir = pathlib.Path(__file__).resolve().parent
+sys.path.append(str(current_dir) + '/modules')
+
 app = Flask('FLASK-VUE',
             static_folder = "./dist/static",
             template_folder = "./dist")
 app.config.from_object('backend.config.BaseConfig')
 
-db = SQLAlchemy(app) # ここを追記
+db = SQLAlchemy(app)
 
 from backend.api import api
 app.register_blueprint(api, url_prefix="/api")
