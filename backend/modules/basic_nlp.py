@@ -7,7 +7,6 @@
 import sys, pathlib
 from pyknp import Jumanpp
 import mojimoji
-# midasi, yomi, genkei, hinsi, bunrui, katuyou1, katuyou2, imis, repname
 
 class MorphAnalysis:
     def __init__(self):
@@ -27,6 +26,7 @@ class MorphAnalysis:
         text = mojimoji.han_to_zen(text)
         rst = self.jumanpp.analysis(text)
         for mrph in rst.mrph_list():
+            # midasi, yomi, genkei, hinsi, bunrui, katuyou1, katuyou2, imis, repname
             if remove_stopwords and (mrph.genkei in self.stopwords):
                 continue
             if mrph.hinsi in allow_word_class:

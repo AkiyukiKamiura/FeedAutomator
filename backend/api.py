@@ -3,7 +3,7 @@ from random import *
 from flask_cors import CORS
 
 from backend import app, db
-from backend.models import Task, Feed
+from backend.models import Task, Feed, Entry
 
 # 自作ライブラリ
 import echo, motto
@@ -15,12 +15,21 @@ def say_hello(name):
     response = { 'msg': "Hello {}".format(name) }
     return jsonify(response)
 
-@api.route('/feeds', methods=['GET'])
+@api.route('/feeds/get', methods=['GET'])
 def get_feeds():
-    # feeds = Feed.query.order_by(Feed.id.desc()).all()
-    # feeds_dict = [feed.to_dict() for feed in feeds]
-    # return jsonify(feeds_dict)
-    return motto.aaa()
+    feeds = Feed.query.order_by(Feed.id.desc()).all()
+    feeds_dict = [feed.to_dict() for feed in feeds]
+    return jsonify(feeds_dict)
+
+@api.route('/feeds/<int:id>/entries', methods=['GET'])
+def get_entries(id):
+    feed = Feed.query.get(id)
+    entries = list(map(lambda x: x.to_dict(), list(feed.entries)))
+    return jsonify(entries)
+
+@api.route('/wakati', methods=['GET'])
+def wakati_text():
+    return 'wakati'
 
 @api.route('/random')
 def random_number():
@@ -30,7 +39,7 @@ def random_number():
     return jsonify(response)
 
 @api.route('/get', methods=['GET'])
-def get_taks():
+def get_task():
     taks = Task.query.order_by(Task.id.desc()).all()
     taks_dict = [task.to_dict() for task in taks]
     return jsonify(taks_dict)

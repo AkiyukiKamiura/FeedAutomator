@@ -1,22 +1,12 @@
 import Vue from 'vue'
+// eslint-disable-next-line
+import BootstrapVue from 'bootstrap-vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
-//
-// Vue.use(Router)
-//
-// export default new Router({
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'HelloWorld',
-//       component: HelloWorld
-//     }
-//   ]
-// })
 
 const routerOptions = [
   {path: '/', component: 'Home'},
   {path: '/about', component: 'About'},
+  {path: '/feeds', component: 'Feed'},
   {path: '/tasks', component: 'Task'},
   {path: '*', component: 'NotFound'}
 ]

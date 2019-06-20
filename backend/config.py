@@ -5,3 +5,4 @@ class BaseConfig(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///backend.db'
     # cookieを暗号化する秘密鍵
     SECRET_KEY = os.urandom(24)
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
